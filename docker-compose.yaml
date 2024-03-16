@@ -1,0 +1,20 @@
+services:
+  scraper:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      MONGODB_HOST: db
+      MONGODB_PORT: 27017
+      MONGODB_DB: sicavs
+    depends_on:
+      - db
+  db:
+    image: mongo
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo:/data/db 
+
+volumes:
+  mongo:

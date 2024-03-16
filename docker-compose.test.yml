@@ -1,0 +1,22 @@
+version: "3"
+services:
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.tests
+    depends_on:
+      - test-db
+    volumes:
+      - .:/app
+    environment:
+      MONGODB_HOST: test-db
+      MONGODB_PORT: 27017
+      MONGODB_DB: sicavs
+  test-db:
+    image: mongo
+    ports:
+      - 2018:27017
+    volumes:
+      - mongo-test:/data/db
+volumes:
+  mongo-test:
